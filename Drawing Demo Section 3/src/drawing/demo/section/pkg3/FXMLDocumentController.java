@@ -26,9 +26,11 @@ public class FXMLDocumentController implements Initializable {
     
     private void drawGrid() {
         double width = drawingCanvas.getWidth();
-        double height = drawingCanvas.getHeight();
+        double height =drawingCanvas.getHeight();
         double dx = 20;
         double dy = 20;
+        System.out.println(width);
+        System.out.println(height);
         
         GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
         gc.setStroke(Color.LIGHTGRAY);
@@ -48,18 +50,54 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
-    private void drawTriangle() {
+    private void draw_gridlines()
+    {
+        double height=drawingCanvas.getHeight();
+        double width=drawingCanvas.getWidth();
+        double dx=5;
+        double dy=5;
+        GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
+        gc.setStroke(Color.LIGHTGRAY);
+                // vertical lines
+        for (double x = 0; x <= width; x = x + dx)
+            gc.strokeLine(x, 0, x, height);
+        
+        // horizontal lines
+        for (double y = 0; y <= height; y = y + dy)
+            gc.strokeLine(0, y, width, y);
+        
+        
+    }
+    private void draw_angle()
+    {
+        GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.strokeLine(40, 10, 40, 150); // line segment A
+        gc.strokeLine(40, 10, 150, 10); // line segment B
+        gc.strokeLine(150, 10, 150, 150); // line segment C
+        gc.strokeLine(40, 150,150, 150);
+        
+        gc.strokeLine(38, 10, 38, 150); // line segment A
+        gc.strokeLine(38, 8, 150, 8); // line segment B
+        gc.strokeLine(152, 8, 152, 150); // line segment C
+        gc.strokeLine(40, 152,150, 152);
+    }
+    
+  private void drawTriangle() {
         GraphicsContext gc = drawingCanvas.getGraphicsContext2D();
         gc.setStroke(Color.BLUE);
         gc.strokeLine(200, 0, 200, 150); // line segment C
         gc.strokeLine(200, 150, 400, 150); // line segment A
         gc.strokeLine(400, 150, 200, 0); // line segment B
-    }
+        gc.strokeLine(0, 0, 0, 0);
+ }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         drawGrid();
         drawTriangle();
+        draw_gridlines();
+        draw_angle();
     }    
     
 }
